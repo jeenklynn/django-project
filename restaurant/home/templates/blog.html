@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Start Latest News -->
+<section id="mu-latest-news">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mu-latest-news-area">
+                    <div class="mu-title">
+                        <span class="mu-subtitle">Latest News</span>
+                        <h2>FROM OUR BLOG</h2>
+                        <i class="fa fa-spoon"></i>
+                        <span class="mu-title-bar"></span>
+                    </div>
+                    <div class="mu-latest-news-content">
+                        <div class="row">
+                            {% for x in blogs %}
+                            <!-- start single blog -->
+                            <div class="col-md-6">
+                                <article class="mu-news-single">
+                                    <h3><a href="/blog/{{ x.title }}">{{ x.title }}</a></h3>
+                                    <figure class="mu-news-img">
+                                        <a href="#"><img src="{{ x.img }}" alt="img"></a>
+                                    </figure>
+                                    <div class="mu-news-single-content">
+                                        <ul class="mu-meta-nav">
+                                            <li>By {{ x.author }}</li>
+                                            <li>Date: {{ x.date }}</li>
+                                        </ul>
+                                        <p>{{ x.content }}</p>
+                                        <div class="mu-news-single-bottom">
+                                            <a href="/blog/{{ x.title }}" class="mu-readmore-btn">Read More</a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Start brows more btn -->
+                        <a href="blog-archive.html" class="mu-browsmore-btn">BROWS MORE</a>
+                        <!-- End brows more btn -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Latest News -->
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Start Chef Section -->
+<section id="mu-chef">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mu-chef-area">
+                    <div class="mu-title">
+                        <span class="mu-subtitle">Our Professionals</span>
+                        <h2>MASTER CHEFS</h2>
+                        <i class="fa fa-spoon"></i>
+                        <span class="mu-title-bar"></span>
+                    </div>
+                    <div class="mu-chef-content">
+                        <ul class="mu-chef-nav">
+                            {% for x in chefs %}
+                            <li>
+                                <div class="mu-single-chef">
+                                    <figure class="mu-single-chef-img">
+                                        <img src="{{ x.photo }}" alt="chef img">
+                                    </figure>
+                                    <div class="mu-single-chef-info">
+                                        <h4>{{ x.fullname }}</h4>
+                                        <span>{{ x.type }} Chef</span>
+                                    </div>
+                                    <div class="mu-single-chef-social">
+                                        <a href="{{ x.facebook }}"><i class="fa fa-facebook"></i></a>
+                                        <a href="{{ x.twitter }}"><i class="fa fa-twitter"></i></a>
+                                        <a href="{{ x.linkedin }}"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Chef Section -->
+{% endblock %}
