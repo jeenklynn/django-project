@@ -4,10 +4,11 @@ from django.template import loader
 from .models import Menu, Blog, Contact, Gallery, Chef, Reservation
 from django.contrib.auth import login, authenticate
 from home.forms import SignUpForm
+from django.contrib.auth.decorators import login_required
 
+#@login_required
 def index(request):
-  template = loader.get_template('index.html')
-  return HttpResponse(template.render())
+  return render(request, "index.html")
 
 def signup(request):
   if request.method == 'POST':
@@ -21,15 +22,10 @@ def signup(request):
       return redirect('index')
   else:
     form = SignUpForm()
-  return render(request, 'signup.html', {'form': form})
-
-def login(request):
-  template = loader.get_template('login.html')
-  return HttpResponse(template.render())
+  return render(request, 'registration/signup.html', {'form': form})
 
 def about_us(request):
-  template = loader.get_template('about-us.html')
-  return HttpResponse(template.render())
+  return render(request, "about-us.html")
 
 def blog(request):
   blog = Blog.objects.all().values()
@@ -77,4 +73,4 @@ def reservation(request):
     'reservations': reservation,
   }
   template = loader.get_template('reservation.html')
-  return HttpResponse(template.render())
+  return HttpResponse(template.render(context, request))
