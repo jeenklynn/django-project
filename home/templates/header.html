@@ -10,12 +10,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href=""><img src="{% static 'assets/img/logo.png' %}"
+                <a class="navbar-brand" href="/"><img src="{% static 'assets/img/logo.png' %}"
                         alt="Logo img"></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
+                    {% if user.is_authenticated == 0 %}
                     <li><a href="/">HOME</a></li>
+                    {% endif %}
                     <li><a href="/about-us">ABOUT US</a></li>
                     <li><a href="/menu">MENU</a></li>
                     <li><a href="/reservation">RESERVATION</a></li>
@@ -24,8 +26,8 @@
                     <li><a href="/blog">BLOG</a></li>
                     <li><a href="/contact">CONTACT</a></li>
                     {% if user.is_authenticated %}
-                    <li><a href="#profile">{{x.username}}</a></li>
-                    <li><a href="/orders">MY ORDERS</a></li>
+                    <li><a>{{user.username}}</a></li>
+                    <li><a href="/orders">ORDERS</a></li>
                     <li><a href="/logout">LOGOUT</a></li>
                     {% else %}
                     <li><a href="/login">LOGIN</a></li>

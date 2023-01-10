@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home.views import index, signup, about_us, blog, contact, gallery, menu, our_team, reservation, login
+from home.views import index, signup, about_us, blog, contact, gallery, menu, our_team, reservation, orders
 from django.conf import settings  
 from django.conf.urls.static import static  
 from django.contrib.auth import views as auth_views
@@ -32,6 +32,7 @@ urlpatterns = [
     path('menu/', menu, name='menu'),
     path('our-team/', our_team, name='our_team'),
     path('reservation/', reservation, name='reservation'),
+    path('orders/', orders, name='orders'),
     path('admin/', admin.site.urls),
 ]
 

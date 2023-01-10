@@ -33,13 +33,13 @@
                             <div class="mu-single-gallery col-md-4 mix {{ x.type }}">
                                 <div class="mu-single-gallery-item">
                                     <figure class="mu-single-gallery-img">
-                                        <a href="#"><img alt="img"
-                                                src="{{ x.img }}"></a>
+                                        <a href="{{ x.img.url }}"><img alt="img"
+                                                src="{{ x.img.url }}"></a>
                                     </figure>
                                     <div class="mu-single-gallery-info">
-                                        <a href="{{ x.img }}"
+                                        <a href="{{ x.img.url }}"
                                             data-fancybox-group="gallery" class="fancybox">
-                                            <img src="{{ x.img }}" alt="plus icon img">
+                                            <img src="{{ x.img.url }}" alt="plus icon img">
                                         </a>
                                     </div>
                                 </div>
