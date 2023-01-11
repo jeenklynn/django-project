@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
 {% block body %}
+    <div class="mu-title">
+        <h2>My Orders</h2>
+        <i class="fa fa-spoon"></i>
+        <span class="mu-title-bar"></span>
+    </div>
     <table>
         <tr>
             <th>Product</th>
             <th>Quantity</th>
             <th>Total Price</th>
         </tr>
-        {% for item in cart %}
+        {% for order in orders %}
         <tr>
-            <td>{{ item.product.name }}</td>
+            <td>{{ order.name }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.total_price }}</td>
         </tr>

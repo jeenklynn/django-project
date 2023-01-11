@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu, Reservation, Gallery, Subscription, Chef, Blog, Contact
+from .models import Menu, Reservation, Gallery, Subscription, Chef, Blog, Contact, Order, OrderItem, ShippingAdress
 
 @admin.register(Menu)
 class Menus(admin.ModelAdmin):
@@ -28,3 +28,8 @@ class Blogs(admin.ModelAdmin):
 @admin.register(Contact)
 class Contact(admin.ModelAdmin):
   list_display = ['name', 'email', 'subject', 'message']
+
+admin.site.register(Order)
+admin.site.register(OrderItem)
+admin.site.register(ShippingAdress)
+

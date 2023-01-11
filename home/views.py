@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from .models import Menu, Blog, Contact, Gallery, Chef, Reservation
+from .models import *
 from django.contrib.auth import login, authenticate
 from home.forms import SignUpForm
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,10 @@ from django.contrib.auth.decorators import login_required
 #@login_required
 def index(request):
   return render(request, "index.html")
+
+@login_required
+def orders(request):
+  return render(request, "orders.html")
 
 def signup(request):
   if request.method == 'POST':
@@ -28,7 +32,7 @@ def about_us(request):
   return render(request, "about-us.html")
 
 def blog(request):
-  blog = Blog.objects.all().values()
+  blog = Blog.objects.all()
   context = {
     'blogs': blog,
   }
@@ -36,7 +40,7 @@ def blog(request):
   return HttpResponse(template.render(context, request))
 
 def contact(request):
-  contact = Contact.objects.all().values()
+  contact = Contact.objects.all()
   context = {
     'contacts': contact,
   }
@@ -44,7 +48,7 @@ def contact(request):
   return HttpResponse(template.render(context, request))
 
 def gallery(request):
-  gallery = Gallery.objects.all().values()
+  gallery = Gallery.objects.all()
   context = {
     'galleries': gallery,
   }
@@ -52,7 +56,7 @@ def gallery(request):
   return HttpResponse(template.render(context, request))
 
 def menu(request):
-  menu = Menu.objects.all().values()
+  menu = Menu.objects.all()
   context = {
     'menus': menu,
   }
@@ -60,7 +64,7 @@ def menu(request):
   return HttpResponse(template.render(context, request))
 
 def our_team(request):
-  chef = Chef.objects.all().values()
+  chef = Chef.objects.all()
   context = {
     'chefs': chef,
   }
@@ -74,3 +78,26 @@ def reservation(request):
   }
   template = loader.get_template('reservation.html')
   return HttpResponse(template.render(context, request))
+
+def cart(request):
+  if request.user.is_authenticated:
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    items = order.orderitem_set.all()
+  else:
+    items = []
+    order = {'get_cart_total': 0, 'get_cart_items': 0}
+  context = {'items': items}
+  template = loader.get_template('cart.html')
+  return HttpResponse(template.render(context, request))
+
+def checkout(request):
+  if request.user_is_authenticated:
+    customer = request.user.customer
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    items = order.orderitem_set.all()
+  else:
+    order = {'get_cart_total': 0, 'get_cart_items': 0}
+    items = []
+  context = {'items':items, 'order': order}
+  return render(request, 'checkout.html', context)

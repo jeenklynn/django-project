@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Start Chef Section -->
+<section id="mu-chef">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mu-chef-area">
+                    <div class="mu-title">
+                        <h2>Order Summary</h2>
+                        <i class="fa fa-spoon"></i>
+                        <span class="mu-title-bar"></span>
+                    </div>
+                    <table>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.product.imageURL }}</td>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.product.price|float.format:2 }}</td>
+                        <td>{{ item.quantity }}</td>
+                    </tr>
+                    {% endfor %}   
+                    </table>
+                    <br>
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-sm-5">
+                            <h3>Items: <strong> {{order.get_cart_items}} </strong></h3>
+                          </div>
+                          <div class="col-sm-5">
+                            <h3>Total: <strong> {{order.get_cart_total|float.format:2}} $ </strong></h3>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Chef Section -->
+{% endblock %}
